@@ -28,7 +28,7 @@ export default function LandingScreen({ onNavigateToChat }: LandingScreenProps) 
       </section>
 
       {/* CTA Section */}
-      <section className="bg-accent text-accent-foreground">
+      <section className="bg-secondary text-secondary-foreground">
         <div className="max-w-6xl mx-auto px-4 py-16 flex flex-col items-center text-center">
           <h2 className="text-4xl font-bold mb-4 font-serif">Ready to Explore?</h2>
           <p className="text-lg mb-8 max-w-md">
@@ -36,7 +36,7 @@ export default function LandingScreen({ onNavigateToChat }: LandingScreenProps) 
           </p>
           <button
             onClick={onNavigateToChat}
-            className="px-8 py-4 bg-accent-foreground text-accent font-bold text-lg border-4 border-accent-foreground rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+            className="px-8 py-4 bg-primary text-primary-foreground font-bold text-lg border-4 border-border shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all"
           >
             Start Planning Your Journey
           </button>

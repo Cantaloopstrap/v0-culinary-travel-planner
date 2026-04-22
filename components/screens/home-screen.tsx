@@ -53,10 +53,10 @@ export default function HomeScreen({ onSelectDestination }: HomeScreenProps) {
   return (
     <div className="w-full h-full overflow-y-auto bg-background">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-primary/20 to-background border-b-4 border-border">
+      <section className="bg-primary/30 border-b-4 border-border">
         <div className="max-w-6xl mx-auto px-4 py-12">
           <div className="text-center mb-8">
-            <h2 className="text-5xl font-bold font-serif mb-4 text-balance text-primary">
+            <h2 className="text-5xl font-bold font-serif mb-4 text-balance text-foreground">
               Jelajahi Keindahan Indonesia
             </h2>
             <p className="text-xl text-foreground/80 max-w-2xl mx-auto text-balance">
@@ -68,7 +68,7 @@ export default function HomeScreen({ onSelectDestination }: HomeScreenProps) {
           <div className="flex justify-center">
             <button
               onClick={() => setShowQuiz(true)}
-              className="px-8 py-4 bg-accent text-accent-foreground border-4 border-accent-foreground rounded-lg font-bold text-lg flex items-center gap-3 hover:shadow-md transition-shadow"
+              className="px-8 py-4 bg-secondary text-secondary-foreground border-4 border-border font-bold text-lg flex items-center gap-3 shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all"
             >
               <Sparkles size={24} />
               Cari Destinasi dengan AI
@@ -85,7 +85,7 @@ export default function HomeScreen({ onSelectDestination }: HomeScreenProps) {
             <button
               key={destination.id}
               onClick={() => onSelectDestination(destination.id)}
-              className="group text-left border-4 border-border rounded-lg overflow-hidden bg-card hover:shadow-md transition-all hover:border-primary"
+              className="group text-left border-4 border-border overflow-hidden bg-card shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all"
             >
               {/* Image */}
               <div className="relative w-full h-48 bg-muted overflow-hidden">
@@ -102,10 +102,10 @@ export default function HomeScreen({ onSelectDestination }: HomeScreenProps) {
                 <h4 className="text-2xl font-bold font-serif mb-2">{destination.name}</h4>
                 <p className="text-foreground/70 mb-4">{destination.description}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-bold bg-secondary text-secondary-foreground px-3 py-1 rounded border-2 border-border">
-                    ⭐ {destination.rating}
+                  <span className="text-sm font-bold bg-primary text-primary-foreground px-3 py-1 border-2 border-border shadow-[2px_2px_0_0_#000]">
+                    {destination.rating}
                   </span>
-                  <span className="text-sm font-bold text-primary">Pelajari →</span>
+                  <span className="text-sm font-bold text-secondary group-hover:text-secondary">Pelajari &rarr;</span>
                 </div>
               </div>
             </button>

@@ -74,7 +74,7 @@ export default function QuizModal({ onClose }: QuizModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-background border-4 border-border rounded-lg max-w-2xl w-full">
+      <div className="bg-background border-4 border-border max-w-2xl w-full shadow-[6px_6px_0_0_#000]">
         {/* Header */}
         <div className="border-b-4 border-border px-6 py-4 flex items-center justify-between">
           <h3 className="text-2xl font-bold font-serif">
@@ -125,10 +125,10 @@ export default function QuizModal({ onClose }: QuizModalProps) {
                   <button
                     key={idx}
                     onClick={() => handleAnswer(option)}
-                    className={`w-full p-4 text-left border-4 border-border rounded-lg font-bold transition-all ${
+                    className={`w-full p-4 text-left border-4 border-border font-bold transition-all ${
                       answers[currentStep] === option
-                        ? 'bg-primary text-primary-foreground shadow-md'
-                        : 'bg-card hover:shadow-sm'
+                        ? 'bg-primary text-primary-foreground shadow-[4px_4px_0_0_#000]'
+                        : 'bg-card shadow-[2px_2px_0_0_#000] hover:shadow-[4px_4px_0_0_#000] hover:-translate-x-0.5 hover:-translate-y-0.5'
                     }`}
                   >
                     {option}
@@ -141,7 +141,7 @@ export default function QuizModal({ onClose }: QuizModalProps) {
                 <button
                   onClick={handleBack}
                   disabled={currentStep === 0}
-                  className="flex items-center gap-2 px-4 py-2 border-4 border-border rounded-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-sm transition-shadow"
+                  className="flex items-center gap-2 px-4 py-2 border-4 border-border font-bold disabled:opacity-50 disabled:cursor-not-allowed shadow-[2px_2px_0_0_#000] hover:shadow-[4px_4px_0_0_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all"
                 >
                   <ChevronLeft size={20} />
                   Kembali
@@ -149,7 +149,7 @@ export default function QuizModal({ onClose }: QuizModalProps) {
                 <button
                   onClick={handleNext}
                   disabled={!answers[currentStep]}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-accent text-accent-foreground border-4 border-accent-foreground rounded-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-sm transition-shadow"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground border-4 border-border font-bold disabled:opacity-50 disabled:cursor-not-allowed shadow-[3px_3px_0_0_#000] hover:shadow-[5px_5px_0_0_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all"
                 >
                   {current.step === QUIZ_STEPS.length ? 'Selesai' : 'Lanjut'}
                   {current.step < QUIZ_STEPS.length && <ChevronRight size={20} />}

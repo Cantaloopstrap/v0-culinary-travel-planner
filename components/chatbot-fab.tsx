@@ -192,10 +192,7 @@ export default function ChatbotFAB() {
               <button
                 type="submit"
                 disabled={isLoading || !inputValue.trim()}
-                className="px-4 py-2 bg-accent text-accent-foreground border-4 border-border rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{
-                  boxShadow: '4px 4px 0px 0px #000',
-                }}
+                className="px-4 py-2 bg-secondary text-secondary-foreground border-4 border-border font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[4px_4px_0_0_#000] hover:shadow-[5px_5px_0_0_#000] hover:-translate-x-0.5 hover:-translate-y-0.5"
               >
                 <Send size={18} />
               </button>
