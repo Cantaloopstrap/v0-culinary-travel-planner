@@ -5,6 +5,7 @@ import { X, ChevronLeft, ChevronRight, Loader } from 'lucide-react'
 
 interface QuizModalProps {
   onClose: () => void
+  onComplete?: (answers: Record<string, string>) => void
 }
 
 const QUIZ_STEPS = [
@@ -35,12 +36,12 @@ const QUIZ_STEPS = [
   },
   {
     step: 6,
-    question: 'Siapa yang akan Anda ajak?',
-    options: ['Keluarga', 'Pasangan', 'Teman', 'Solo'],
+    question: 'Siapa teman perjalanan Anda?',
+    options: ['Solo', 'Pasangan', 'Keluarga', 'Teman'],
   },
 ]
 
-export default function QuizModal({ onClose }: QuizModalProps) {
+export default function QuizModal({ onClose, onComplete }: QuizModalProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [answers, setAnswers] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -61,6 +62,15 @@ export default function QuizModal({ onClose }: QuizModalProps) {
       setIsLoading(true)
       setTimeout(() => {
         setIsLoading(false)
+        // Convert answers to dict format
+        const answerDict: Record<string, string> = {}
+        answers.forEach((answer, idx) => {
+          const question = QUIZ_STEPS[idx]
+          answerDict[`step${idx + 1}`] = answer
+        })
+        if (onComplete) {
+          onComplete(answerDict)
+        }
         onClose()
       }, 2000)
     }
@@ -125,10 +135,10 @@ export default function QuizModal({ onClose }: QuizModalProps) {
                   <button
                     key={idx}
                     onClick={() => handleAnswer(option)}
-                    className={`w-full p-4 text-left border-4 border-border font-black transition-all ${
+                    className={`w-full p-4 text-left border-4 font-black transition-all ${
                       answers[currentStep] === option
-                        ? 'bg-primary text-primary-foreground shadow-[4px_4px_0_0] shadow-border'
-                        : 'bg-card text-card-foreground shadow-[4px_4px_0_0] shadow-border hover:shadow-[2px_2px_0_0] hover:shadow-border hover:translate-x-[2px] hover:translate-y-[2px]'
+                        ? 'bg-primary text-primary-foreground border-yellow-400 shadow-[4px_4px_0_0] shadow-cyan-400 ring-4 ring-yellow-300'
+                        : 'border-border bg-card text-card-foreground shadow-[4px_4px_0_0] shadow-border hover:shadow-[2px_2px_0_0] hover:shadow-border hover:translate-x-[2px] hover:translate-y-[2px]'
                     }`}
                   >
                     {option}
@@ -141,7 +151,7 @@ export default function QuizModal({ onClose }: QuizModalProps) {
                 <button
                   onClick={handleBack}
                   disabled={currentStep === 0}
-                  className="flex items-center gap-2 px-4 py-2 bg-muted text-foreground border-4 border-border font-black disabled:opacity-50 disabled:cursor-not-allowed shadow-[4px_4px_0_0] shadow-border hover:shadow-[2px_2px_0_0] hover:shadow-border hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                  className="flex items-center gap-2 px-4 py-2 bg-muted text-foreground border-4 border-border font-black disabled:opacity-50 disabled:cursor-not-allowed shadow-[4px_4px_0_0] shadow-border hover:shadow-[2px_2px_0_0] hover:shadow-border hover:translate-x-[2px] hover:translate-y-[2px] hover:border-cyan-400 transition-all"
                 >
                   <ChevronLeft size={20} />
                   Kembali
@@ -149,7 +159,7 @@ export default function QuizModal({ onClose }: QuizModalProps) {
                 <button
                   onClick={handleNext}
                   disabled={!answers[currentStep]}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground border-4 border-border font-black disabled:opacity-50 disabled:cursor-not-allowed shadow-[4px_4px_0_0] shadow-border hover:shadow-[2px_2px_0_0] hover:shadow-border hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground border-4 border-border font-black disabled:opacity-50 disabled:cursor-not-allowed shadow-[4px_4px_0_0] shadow-border hover:shadow-[2px_2px_0_0] hover:shadow-border hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] hover:border-yellow-400 transition-all"
                 >
                   {current.step === QUIZ_STEPS.length ? 'Selesai' : 'Lanjut'}
                   {current.step < QUIZ_STEPS.length && <ChevronRight size={20} />}

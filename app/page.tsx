@@ -9,6 +9,7 @@ import HomeScreen from '@/components/screens/home-screen'
 import CityDashboard from '@/components/screens/city-dashboard'
 import NewsReviews from '@/components/screens/news-reviews'
 import DestinationDetail from '@/components/screens/destination-detail'
+import TimelineSidebar from '@/components/timeline-sidebar'
 
 type Screen = 'home' | 'city' | 'news' | 'detail'
 
@@ -21,6 +22,8 @@ export default function Home() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home')
   const [selectedDestination, setSelectedDestination] = useState<string | null>(null)
   const [itinerary, setItinerary] = useState<ItineraryDestination[]>([])
+  const [showTimeline, setShowTimeline] = useState(false)
+  const [quizAnswers, setQuizAnswers] = useState<Record<string, string>>({})
   const { theme, setTheme } = useTheme()
 
   const handleDestinationSelect = (destination: string) => {
@@ -34,6 +37,17 @@ export default function Home() {
       { name: destinationName, addedAt: new Date() },
     ])
     console.log('[v0] Added to itinerary:', destinationName)
+  }
+
+  const handleQuizComplete = (answers: Record<string, string>) => {
+    setQuizAnswers(answers)
+    setShowTimeline(true)
+    console.log('[v0] Quiz completed with answers:', answers)
+  }
+
+  const handleEditPreferences = () => {
+    setShowTimeline(false)
+    setQuizAnswers({})
   }
 
   return (
@@ -55,7 +69,7 @@ export default function Home() {
       {/* Main Content */}
       <main className="flex-1 overflow-hidden">
         {currentScreen === 'home' && (
-          <HomeScreen onSelectDestination={handleDestinationSelect} />
+          <HomeScreen onSelectDestination={handleDestinationSelect} onQuizComplete={handleQuizComplete} />
         )}
         {currentScreen === 'city' && (
           <CityDashboard />
@@ -73,6 +87,15 @@ export default function Home() {
 
       {/* Chatbot FAB */}
       <ChatbotFAB onAddDestinationToItinerary={handleAddToItinerary} />
+
+      {/* Timeline Sidebar */}
+      <TimelineSidebar
+        isOpen={showTimeline}
+        onClose={() => setShowTimeline(false)}
+        itinerary={itinerary}
+        quizAnswers={quizAnswers}
+        onEditPreferences={handleEditPreferences}
+      />
     </div>
   )
 }
