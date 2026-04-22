@@ -12,14 +12,28 @@ import DestinationDetail from '@/components/screens/destination-detail'
 
 type Screen = 'home' | 'city' | 'news' | 'detail'
 
+interface ItineraryDestination {
+  name: string
+  addedAt: Date
+}
+
 export default function Home() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home')
   const [selectedDestination, setSelectedDestination] = useState<string | null>(null)
+  const [itinerary, setItinerary] = useState<ItineraryDestination[]>([])
   const { theme, setTheme } = useTheme()
 
   const handleDestinationSelect = (destination: string) => {
     setSelectedDestination(destination)
     setCurrentScreen('detail')
+  }
+
+  const handleAddToItinerary = (destinationName: string) => {
+    setItinerary((prev) => [
+      ...prev,
+      { name: destinationName, addedAt: new Date() },
+    ])
+    console.log('[v0] Added to itinerary:', destinationName)
   }
 
   return (
@@ -58,7 +72,7 @@ export default function Home() {
       <Navbar currentScreen={currentScreen} onScreenChange={setCurrentScreen} />
 
       {/* Chatbot FAB */}
-      <ChatbotFAB />
+      <ChatbotFAB onAddDestinationToItinerary={handleAddToItinerary} />
     </div>
   )
 }

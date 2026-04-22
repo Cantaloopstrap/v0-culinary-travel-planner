@@ -65,7 +65,7 @@ export default function AuthModal({ isOpen, mode, onClose, onModeChange }: AuthM
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Masukkan nama lengkap"
                 required={mode === 'register'}
-                className="w-full px-4 py-3 border-4 border-border bg-card text-foreground font-bold placeholder-muted-foreground focus:outline-none shadow-[4px_4px_0_0] shadow-border focus:shadow-[2px_2px_0_0] focus:shadow-border focus:translate-x-[2px] focus:translate-y-[2px] transition-all"
+                className="w-full px-4 py-3 border-4 border-border bg-card text-foreground font-bold placeholder-muted-foreground focus:outline-none shadow-[4px_4px_0_0] shadow-border focus:border-yellow-400 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-400 focus:shadow-[2px_2px_0_0] focus:shadow-border focus:translate-x-[2px] focus:translate-y-[2px] transition-all"
               />
             </div>
           )}
@@ -79,7 +79,7 @@ export default function AuthModal({ isOpen, mode, onClose, onModeChange }: AuthM
               onChange={(e) => setEmail(e.target.value)}
               placeholder="nama@example.com"
               required
-              className="w-full px-4 py-3 border-4 border-border bg-card text-foreground font-bold placeholder-muted-foreground focus:outline-none shadow-[4px_4px_0_0] shadow-border focus:shadow-[2px_2px_0_0] focus:shadow-border focus:translate-x-[2px] focus:translate-y-[2px] transition-all"
+              className="w-full px-4 py-3 border-4 border-border bg-card text-foreground font-bold placeholder-muted-foreground focus:outline-none shadow-[4px_4px_0_0] shadow-border focus:border-yellow-400 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-400 focus:shadow-[2px_2px_0_0] focus:shadow-border focus:translate-x-[2px] focus:translate-y-[2px] transition-all"
             />
           </div>
 
@@ -92,7 +92,7 @@ export default function AuthModal({ isOpen, mode, onClose, onModeChange }: AuthM
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              className="w-full px-4 py-3 border-4 border-border bg-card text-foreground font-bold placeholder-muted-foreground focus:outline-none shadow-[4px_4px_0_0] shadow-border focus:shadow-[2px_2px_0_0] focus:shadow-border focus:translate-x-[2px] focus:translate-y-[2px] transition-all"
+              className="w-full px-4 py-3 border-4 border-border bg-card text-foreground font-bold placeholder-muted-foreground focus:outline-none shadow-[4px_4px_0_0] shadow-border focus:border-yellow-400 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-400 focus:shadow-[2px_2px_0_0] focus:shadow-border focus:translate-x-[2px] focus:translate-y-[2px] transition-all"
             />
           </div>
 
