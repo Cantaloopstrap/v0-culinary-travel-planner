@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { Plus } from 'lucide-react'
+import { useToast } from '@/hooks/use-toast'
 
 interface RichDestinationCardProps {
   destination: string
@@ -16,6 +17,7 @@ export default function RichDestinationCard({
   status,
   onAddToPlan,
 }: RichDestinationCardProps) {
+  const { toast } = useToast()
   const statusColor =
     status === 'Ramai' ? '#ef4444' : status === 'Sedang' ? '#eab308' : '#22c55e'
   const statusBgColor =
@@ -54,7 +56,12 @@ export default function RichDestinationCard({
 
         {/* Add to Plan Button */}
         <button
-          onClick={onAddToPlan}
+          onClick={() => {
+            toast({
+              description: "Destinasi ditambahkan! 🌴",
+            })
+            onAddToPlan()
+          }}
           className="w-full px-4 py-2 bg-primary text-primary-foreground border-4 border-border font-black text-sm shadow-[4px_4px_0_0] shadow-border hover:shadow-[2px_2px_0_0] hover:shadow-border hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all flex items-center justify-center gap-2"
         >
           <Plus size={18} />

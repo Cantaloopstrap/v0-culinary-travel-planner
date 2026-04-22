@@ -17,6 +17,10 @@ interface Message {
   }
 }
 
+interface ChatbotFABProps {
+  onAddDestinationToItinerary?: (destinationName: string) => void
+}
+
 const DESTINATIONS = [
   { name: 'Bali', image: '/bali.jpg', status: 'Ramai' as const },
   { name: 'Yogyakarta', image: '/yogyakarta.jpg', status: 'Sedang' as const },
@@ -25,7 +29,7 @@ const DESTINATIONS = [
   { name: 'Bontang', image: '/bontang.jpg', status: 'Sedang' as const },
 ]
 
-export default function ChatbotFAB() {
+export default function ChatbotFAB({ onAddDestinationToItinerary }: ChatbotFABProps = {}) {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -104,13 +108,9 @@ export default function ChatbotFAB() {
   }
 
   const handleAddToPlan = (destination: string) => {
-    const confirmMessage: Message = {
-      id: Date.now().toString(),
-      text: `Bagus! "${destination}" telah ditambahkan ke rencana perjalanan Anda.`,
-      sender: 'ai',
-      type: 'text',
+    if (onAddDestinationToItinerary) {
+      onAddDestinationToItinerary(destination)
     }
-    setMessages((prev) => [...prev, confirmMessage])
   }
 
   return (

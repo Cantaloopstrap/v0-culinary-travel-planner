@@ -7,6 +7,7 @@ import QuizModal from '../quiz-modal'
 
 interface HomeScreenProps {
   onSelectDestination: (destination: string) => void
+  onQuizComplete?: (answers: Record<string, string>) => void
 }
 
 const DESTINATIONS = [
@@ -47,7 +48,7 @@ const DESTINATIONS = [
   },
 ]
 
-export default function HomeScreen({ onSelectDestination }: HomeScreenProps) {
+export default function HomeScreen({ onSelectDestination, onQuizComplete }: HomeScreenProps) {
   const [showQuiz, setShowQuiz] = useState(false)
 
   return (
@@ -114,7 +115,12 @@ export default function HomeScreen({ onSelectDestination }: HomeScreenProps) {
       </section>
 
       {/* Quiz Modal */}
-      {showQuiz && <QuizModal onClose={() => setShowQuiz(false)} />}
+      {showQuiz && (
+        <QuizModal
+          onClose={() => setShowQuiz(false)}
+          onComplete={onQuizComplete}
+        />
+      )}
     </div>
   )
 }
